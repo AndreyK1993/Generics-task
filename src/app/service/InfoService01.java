@@ -6,30 +6,20 @@ import java.util.Scanner;
 
 public class InfoService01 {
 
-    Scanner scanner;
-    String name;
-    String email;
-
     public String getData() {
-
         return formData(getInputs());
     }
 
     private Client<String, String> getInputs() {
-        scanner = new Scanner(System.in);
-
-        // Обработка ошибок при вводе
-        try {
+        try (Scanner scanner = new Scanner(System.in)) {
             System.out.print("Enter client's name: ");
-            name = scanner.nextLine();
+            String name = scanner.nextLine();
 
             System.out.print("Enter client's email: ");
-            email = scanner.nextLine();
+            String email = scanner.nextLine();
 
             return new Client<>(name, email);
-
         } catch (Exception e) {
-            // Обработка исключений
             System.out.println("Invalid input. Please enter valid values.");
             return new Client<>("Unknown", "Unknown");
         }
